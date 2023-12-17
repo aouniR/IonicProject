@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-title class="ion-text-center">
+      Add-Announce
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Title</ion-label>
+      <ion-input [(ngModel)]="announceData.title" name="title" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-textarea [(ngModel)]="announceData.description" name="description" required></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Category</ion-label>
+      <ion-input [(ngModel)]="announceData.categorie" name="category" required></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" (click)="addAnnounce()">Add Announcement</ion-button>
+</ion-content>

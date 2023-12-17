@@ -1,20 +1,33 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
+  <ion-toolbar color="secondary">
+    <ion-title class="ion-text-center">
+      Announces
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="AddAnnounce()">
+        <ion-icon slot="icon-only" name="add-circle-outline" defaultHref="/add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-list *ngIf="announces.length > 0; else noAnnounces">
+    <ion-item *ngFor="let announce of announces">
+      <ion-thumbnail slot="start">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ announce.title }}</h2>
+        <p>{{ announce.description }}</p>
+        <p>Catégorie: {{ announce.category }}</p>
+        <p>Utilisateur: {{ announce.user }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ng-template #noAnnounces>
+    <ion-text color="medium">
+      <p>No Announces found!.</p>
+    </ion-text>
+  </ng-template>
 </ion-content>
