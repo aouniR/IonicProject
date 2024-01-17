@@ -1,3 +1,4 @@
+//login page
 import { Component } from '@angular/core';
 import { Router } from '@angular/router'; 
 import { AuthService } from '../services/auth.service';
@@ -9,17 +10,16 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginPage {
 
+  //LoginData to store email, and password data from input
   loginData = { email: '', password: '' };
 
-  constructor(private authService: AuthService, private router: Router) {}
-
-  updateEmail(event: any) {
-    this.loginData.email = event.target.value;
-  }
-
-  updatePassword(event: any) {
-    this.loginData.password = event.target.value;
-  }
+  constructor(
+    //Injection of the AuthService to login
+    private authService: AuthService, 
+    //Injection of the Router to redirect user
+    private router: Router) {}
+    
+  //Login 
   async login() {
     try {
       const { email, password } = this.loginData;
@@ -30,6 +30,7 @@ export class LoginPage {
       console.error('Login error', error);
     }
   }
+  //Redirect to register page
   register() {
     this.router.navigate(['/register']); 
   }

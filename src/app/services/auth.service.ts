@@ -1,4 +1,4 @@
-// src/app/services/auth.service.ts
+// auth.service
 import { Injectable } from '@angular/core';
 import { Auth, UserCredential, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { FirebaseService } from './firebase.service';

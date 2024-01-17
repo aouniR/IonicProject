@@ -14,17 +14,20 @@
     <ion-card-content>
       <ion-item>
         <ion-label position="floating">Email</ion-label>
-        <ion-input [(ngModel)]="registerData.email" (ionInput)="updateEmail($event)"></ion-input>
+        <!-- the binding between user input and ts variable -->
+        <ion-input [(ngModel)]="registerData.email" ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Password</ion-label>
-        <ion-input [(ngModel)]="registerData.password" (ionInput)="updatePassword($event)" type="password"></ion-input>
+        <!-- the binding between user input and ts variable -->
+        <ion-input [(ngModel)]="registerData.password"  type="password"></ion-input>
       </ion-item>
       <!-- Display error messages -->
       <div *ngIf="errorMessage" class="ion-text-center ion-text-danger ion-margin">
         {{ errorMessage }}
       </div>
       <div class="ion-text-end ion-margin">
+        <!-- Event binding to run the register function  -->
         <ion-button color="Primary" fill="outline" (click)="register()">Register</ion-button>
       </div>
     </ion-card-content>

@@ -1,3 +1,4 @@
+// The announce model
 export interface Annonce {
     id: string;
     title: string ;

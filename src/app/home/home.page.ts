@@ -1,3 +1,4 @@
+//home page
 import { Component, OnInit } from '@angular/core';
 import { FirebaseAnnonceService } from '../services/firebase-annonce.service';
 import { AuthService } from '../services/auth.service';
@@ -11,7 +12,13 @@ import { Annonce } from './announce.model';
 export class HomePage implements OnInit {
   announces: Annonce[] = [];
 
-  constructor(private annonceService: FirebaseAnnonceService, private authService: AuthService, private router: Router) {}
+  constructor(
+    //Injection of the FirebaseAnnonceService to use the getToutesAnnonces function to get all announces in db
+    private annonceService: FirebaseAnnonceService, 
+    //Injection of the AuthService to logout when Leave() function activated
+    private authService: AuthService, 
+    //Injection of the Router to redirect user
+    private router: Router) {}
 
   ngOnInit() {
     this.annonceService.getToutesAnnonces().subscribe((data) => {

@@ -4,18 +4,20 @@
       Announces
     </ion-title>
     <ion-buttons slot="end">
+      <!-- Event binding to run the addAnnounce function to be redirected to the add-announce page -->
       <ion-button (click)="AddAnnounce()">
         <ion-icon slot="icon-only" name="add-circle-outline" ></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="start">
+      <!-- Event binding to run the Leave function to be logout -->
       <ion-button (click)="Leave()">
         <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
+<!-- show announces content  -->
 <ion-content [fullscreen]="true">
   <ion-list *ngIf="announces.length > 0; else noAnnounces">
     <ion-item *ngFor="let announce of announces">
@@ -29,7 +31,7 @@
       </ion-label>
     </ion-item>
   </ion-list>
-
+<!-- show "No Announces found" when there's no announce found in db  -->
   <ng-template #noAnnounces>
     <ion-text color="medium">
       <p>No Announces found!.</p>

@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard } from './services/auth.guard';
 const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    //Activate the AuthGuard service
     canActivate: [AuthGuard] 
   },
   {
@@ -22,7 +23,9 @@ const routes: Routes = [
   },
   {
     path: 'add-announce',
-    loadChildren: () => import('./add-announce/add-announce.module').then( m => m.AddAnnouncePageModule)
+    loadChildren: () => import('./add-announce/add-announce.module').then( m => m.AddAnnouncePageModule),
+    //Activate the AuthGuard service
+    canActivate: [AuthGuard] 
   },
 ];
 
