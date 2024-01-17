@@ -8,18 +8,23 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class FirebaseAnnonceService {
-  private readonly ANNONCES_COLLECTION_NAME = 'announces';
 
   constructor(private firebaseService: FirebaseService) {}
 
   async ajouterAnnonce(annonce: Annonce): Promise<void> {
     const db = this.firebaseService.getFirestore();
-    await addDoc(collection(db, this.ANNONCES_COLLECTION_NAME), annonce);
+    
+    try {
+      await addDoc(collection(db, 'announces'), annonce);
+      console.log('Announce added successfully');
+    } catch (error) {
+      console.error('Error adding announce:', error);
+    }
   }
 
   getAnnoncesUtilisateur(user: string): Observable<Annonce[]> {
     const db = this.firebaseService.getFirestore();
-    const annoncesQuery = query(collection(db, this.ANNONCES_COLLECTION_NAME), where('user', '==', user));
+    const annoncesQuery = query(collection(db,  'announces'), where('user', '==', user));
 
     return new Observable<Annonce[]>((observer) => {
       getDocs(annoncesQuery).then((querySnapshot: QuerySnapshot<DocumentData>) => {
@@ -34,7 +39,7 @@ export class FirebaseAnnonceService {
 
   getToutesAnnonces(): Observable<Annonce[]> {
     const db = this.firebaseService.getFirestore();
-    const annoncesQuery = query(collection(db, this.ANNONCES_COLLECTION_NAME));
+    const annoncesQuery = query(collection(db,  'announces'));
 
     return new Observable<Annonce[]>((observer) => {
       getDocs(annoncesQuery).then((querySnapshot: QuerySnapshot<DocumentData>) => {

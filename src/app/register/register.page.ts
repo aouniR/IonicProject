@@ -11,7 +11,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 export class RegisterPage {
   
   registerData = { email: '', password: '' };
-
+  errorMessage: string = '';
   constructor(private firebaseService: FirebaseService, private router: Router) {}
 
   updateEmail(event: any) {
@@ -30,7 +30,8 @@ export class RegisterPage {
       console.log('Registration successful');
       this.router.navigate(['/login']);
     } catch (error) {
-      console.error('Registration error', error);
+      console.error('Registration error :', error);
+      this.errorMessage = 'Registration failed :'+error;
     }
   }
 }

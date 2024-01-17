@@ -10,22 +10,25 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item>
-      <ion-label position="floating">Title</ion-label>
-      <ion-input [(ngModel)]="announceData.title" name="title" required></ion-input>
-    </ion-item>
+  <form #announceForm="ngForm">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Title</ion-label>
+        <ion-input [(ngModel)]="announceData.title" name="title" required></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Description</ion-label>
-      <ion-textarea [(ngModel)]="announceData.description" name="description" required></ion-textarea>
-    </ion-item>
+      <ion-item>
+        <ion-label position="floating">Description</ion-label>
+        <ion-textarea [(ngModel)]="announceData.description" name="description" required></ion-textarea>
+      </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Category</ion-label>
-      <ion-input [(ngModel)]="announceData.categorie" name="category" required></ion-input>
-    </ion-item>
-  </ion-list>
-
-  <ion-button expand="full" (click)="addAnnounce()">Add Announcement</ion-button>
+      <ion-item>
+        <ion-label position="floating">Category</ion-label>
+        <ion-input [(ngModel)]="announceData.category" name="category" required></ion-input>
+      </ion-item>
+    </ion-list>
+    <div class="ion-text-end ion-margin">
+      <ion-button color="primary" fill="outline" (click)="addAnnounce(announceForm)">Add</ion-button>
+    </div>
+  </form>
 </ion-content>

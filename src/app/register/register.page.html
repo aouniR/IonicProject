@@ -1,8 +1,11 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
+  <ion-toolbar color="secondary">
+    <ion-title class="ion-text-center">
       Register
     </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -17,8 +20,13 @@
         <ion-label position="floating">Password</ion-label>
         <ion-input [(ngModel)]="registerData.password" (ionInput)="updatePassword($event)" type="password"></ion-input>
       </ion-item>
-
-      <ion-button expand="full" (click)="register()">Register</ion-button>
+      <!-- Display error messages -->
+      <div *ngIf="errorMessage" class="ion-text-center ion-text-danger ion-margin">
+        {{ errorMessage }}
+      </div>
+      <div class="ion-text-end ion-margin">
+        <ion-button color="Primary" fill="outline" (click)="register()">Register</ion-button>
+      </div>
     </ion-card-content>
   </ion-card>
 </ion-content>

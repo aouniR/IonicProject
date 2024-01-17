@@ -1,45 +1,56 @@
-// src/app/add-announce/add-announce.page.ts
-import { Component } from '@angular/core';
-import { AnnonceService } from '../services/annonce.service';
+import { Component, OnInit } from '@angular/core';
+import { FirebaseAnnonceService } from '../services/firebase-annonce.service';
 import { Annonce } from '../home/announce.model';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-announce',
   templateUrl: './add-announce.page.html',
   styleUrls: ['./add-announce.page.scss'],
 })
-export class AddAnnouncePage {
+export class AddAnnouncePage implements OnInit {
   announceData: Annonce = {
     id: '',
     title: '',
     description: '',
-    categorie: '',
+    category: '',
     user: '',
   };
 
-  constructor(private annonceService: AnnonceService) {}
+  constructor(
+    private annonceService: FirebaseAnnonceService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
-  addAnnounce() {
+  ngOnInit(): void {
+    this.resetForm();
+  }
 
-    const newAnnounce: Annonce = {
-      id: Date.now().toString(), 
-      title: this.announceData.title,
-      description: this.announceData.description,
-      categorie: this.announceData.categorie,
-      user: this.announceData.user,
-    };
+  resetForm(form?: NgForm): void {
+    if (form) {
+      form.resetForm();
+    }
+  }
 
-    this.annonceService.ajouterAnnonce(newAnnounce);
+  addAnnounce(form: NgForm): void {
+    if (form.valid) {
+      const newAnnounce: Annonce = {
+        id: Date.now().toString(),
+        title: this.announceData.title,
+        description: this.announceData.description,
+        category: this.announceData.category,
+        user: this.authService.UserEmail(),
+      };
 
+      this.annonceService.ajouterAnnonce(newAnnounce);
+      console.log('Announcement added successfully:', newAnnounce);
 
-    this.announceData = {
-      id: '',
-      title: '',
-      description: '',
-      categorie: '',
-      user: '',
-    };
+      this.resetForm(form);
 
-    console.log('Announcement added successfully:', newAnnounce);
+      this.router.navigate(['/home']);
+    }
   }
 }

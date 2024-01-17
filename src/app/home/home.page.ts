@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AnnonceService } from '../services/annonce.service';
+import { FirebaseAnnonceService } from '../services/firebase-annonce.service';
+import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router'; 
 import { Annonce } from './announce.model';
 @Component({
@@ -8,15 +9,22 @@ import { Annonce } from './announce.model';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  announces: Annonce[]|any ;
+  announces: Annonce[] = [];
 
-  constructor(private annonceService: AnnonceService, private router: Router) {}
+  constructor(private annonceService: FirebaseAnnonceService, private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    this.announces = this.annonceService.getToutesAnnonces();
+    this.annonceService.getToutesAnnonces().subscribe((data) => {
+      this.announces = data;
+    });
   }
 
   AddAnnounce(){
     this.router.navigate(['/add-announce']);
+  }
+  Leave(){
+    this.authService.logout();
+    console.log('user logged out');
+    this.router.navigate(['/login']);
   }
 }
